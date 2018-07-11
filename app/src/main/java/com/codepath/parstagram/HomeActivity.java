@@ -24,6 +24,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+
 public class HomeActivity extends AppCompatActivity {
     private static final String imagePath = Environment.getExternalStorageDirectory()+ "/storage/emulated/0/DCIM/Camera/IMG_20180710_135221.jpg";
     EditText etDescription;
@@ -166,7 +167,6 @@ public class HomeActivity extends AppCompatActivity {
             Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
         }
     }
-
 
 
 }

@@ -16,10 +16,12 @@ public class ParseApp extends Application {
 
         ParseObject.registerSubclass(Post.class);
         final Parse.Configuration configuration = new Parse.Configuration.Builder(this)
+
                 .applicationId("anjolaomoniyi")
                 .clientKey("Mobolaji99?")
                 .server("http://parstagram-ajj.herokuapp.com/parse")
                 .build();
+        //TODO hide your keys bro!!!
         Parse.initialize(configuration);
     }
 }
