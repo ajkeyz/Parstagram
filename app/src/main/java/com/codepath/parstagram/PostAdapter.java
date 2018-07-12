@@ -1,6 +1,7 @@
 package com.codepath.parstagram;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,10 +15,11 @@ import com.bumptech.glide.Glide;
 import com.codepath.parstagram.model.Post;
 import com.parse.ParseFile;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-
 
 
     ArrayList<Post> posts;
@@ -27,7 +29,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
     //intitialize list of posts
-    public PostAdapter(ArrayList<Post> posts){
+    public PostAdapter(ArrayList<Post> posts) {
         this.posts = posts;
     }
 
@@ -35,7 +37,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return config;
     }
 
-    public void setConfig(Bitmap.Config config){
+    public void setConfig(Bitmap.Config config) {
         this.config = config;
     }
 
@@ -61,15 +63,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         ParseFile img = post.getImage();
         String imgUrl = "";
-        if (img != null){
+        if (img != null) {
             imgUrl = img.getUrl();
         }
 
         Glide.with(context)
                 .load(imgUrl)
                 .into(holder.userImage);
-
-
 
 
     }
@@ -80,14 +80,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return posts.size();
     }
 
-    public class ViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView userImage;
         TextView etDescription;
         TextView userName;
         TextView timeStamp;
-
-
 
 
         public ViewHolder(View itemView) {
@@ -106,29 +104,32 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         @Override
         public void onClick(View view) {
 
-        /*    //get item position
+
+            //get item position
             int position = getAdapterPosition();
             //make sure the position is valid
             if (position != RecyclerView.NO_POSITION) {
                 //get the movie at the position, this wont work if the class is static
                 Post post = posts.get(position);
                 //create an intent for the activity
-                Intent intent = new Intent(context, TweetDetailActivity.clas);
-                //serialize the movie using parceler, use its short name as a key
-                intent.putExtra("tweet", Parcels.wrap(tweet));
+                Intent intent = new Intent(context, DetailsActivity.class);
+
+                intent.putExtra("post", Parcels.wrap(post));
                 //show the activity
-                context.startActivity(intent);*/
+               context.startActivity(intent);
 
 
             }
+        }
+
+
+
     }
-
-
-
-
     public void clear() {
         posts.clear();
         notifyDataSetChanged();
     }
 
 }
+
+

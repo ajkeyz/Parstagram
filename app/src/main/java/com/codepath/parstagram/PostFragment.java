@@ -152,6 +152,7 @@ public class PostFragment extends Fragment {
                 if (e == null){
                     Log.d("PostFragment", "Create Post Success");
 
+
                 }
                 else  {
                     e.printStackTrace();

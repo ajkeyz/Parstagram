@@ -23,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     FeedFragment feedFragment;
 
     SwipeRefreshLayout swipeContainer;
-    String TAG;
+
     private BottomNavigationView bottomNavigationView;
 
     @Override
@@ -42,13 +42,14 @@ public class HomeActivity extends AppCompatActivity {
         //changeHome();
 
 
+
         //  final FragmentManager fragmentManager = getSupportFragmentManager();
 
         // define your fragments here
 
         final Fragment fragment2 = new PostFragment();
         final Fragment fragment3 = new ProfileFragment();
-      //  final Fragment fragment4 = new DetailsFragment()
+
 
         // handle navigation selection
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -71,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
                                 item.setIcon(you);
                                 fragmentTransaction = fragmentManager.beginTransaction();
                                 fragmentTransaction.replace(R.id.your_placeholder, fragment2).commit();
+
                                 return true;
                             case R.id.profile:
 
@@ -78,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
                                 fragmentTransaction.replace(R.id.your_placeholder, fragment3).commit();
                                 return true;
 
-                         //   case R.id.
+
                         }
 
                         return false;
