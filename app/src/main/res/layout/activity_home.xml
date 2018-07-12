@@ -7,65 +7,6 @@
     tools:context=".HomeActivity">
 
 
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="285dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/create_btn"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:hint="Enter your caption"
-        android:inputType="textPersonName" />
-
-    <Button
-        android:id="@+id/create_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/refresh_btn"
-        android:layout_marginStart="101dp"
-        android:text="Post" />
-
-    <Button
-        android:id="@+id/refresh_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="185dp"
-        android:layout_marginEnd="90dp"
-        android:text="Refresh" />
-
-    <Button
-        android:id="@+id/btTakePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="218dp"
-        android:onClick="dispatchTakePictureIntent"
-        android:text="Take a photo" />
-
-    <ImageView
-        android:id="@+id/ivCamImage"
-        android:layout_width="146dp"
-        android:layout_height="129dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="64dp"
-        app:srcCompat="@android:color/darker_gray" />
-
-    <Button
-        android:id="@+id/btLogOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/refresh_btn"
-        android:layout_marginBottom="127dp"
-        android:onClick="logOut"
-        android:text="Log Out" />
-
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -74,5 +15,14 @@
         android:layout_alignParentStart="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_bottom_navigation" />
+
+    <FrameLayout
+        android:id="@+id/your_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+    </FrameLayout>
 
 </RelativeLayout>
