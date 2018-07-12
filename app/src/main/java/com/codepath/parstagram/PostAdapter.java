@@ -23,6 +23,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     ArrayList<Post> posts;
     Context context;
     Bitmap.Config config;
+    RecyclerView recyclerView;
 
 
     //intitialize list of posts
@@ -56,6 +57,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         Post post = posts.get(position);
         holder.etDescription.setText(post.getUser().getUsername() + " : " + post.getDescription());
         holder.userName.setText(post.getUser().getUsername());
+        holder.timeStamp.setText(post.getRelativeTimeAgo());
 
         ParseFile img = post.getImage();
         String imgUrl = "";
@@ -78,11 +80,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return posts.size();
     }
 
-    public class ViewHolder extends  RecyclerView.ViewHolder {
+    public class ViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView userImage;
         TextView etDescription;
         TextView userName;
+        TextView timeStamp;
+
 
 
 
@@ -91,9 +95,40 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             userImage = itemView.findViewById(R.id.homeImage);
             etDescription = itemView.findViewById(R.id.homeDescription);
             userName = itemView.findViewById(R.id.homeUsername);
+            timeStamp = itemView.findViewById(R.id.tvTimeStamp);
+
+            itemView.setOnClickListener(this);
+
 
         }
 
 
+        @Override
+        public void onClick(View view) {
+
+        /*    //get item position
+            int position = getAdapterPosition();
+            //make sure the position is valid
+            if (position != RecyclerView.NO_POSITION) {
+                //get the movie at the position, this wont work if the class is static
+                Post post = posts.get(position);
+                //create an intent for the activity
+                Intent intent = new Intent(context, TweetDetailActivity.clas);
+                //serialize the movie using parceler, use its short name as a key
+                intent.putExtra("tweet", Parcels.wrap(tweet));
+                //show the activity
+                context.startActivity(intent);*/
+
+
+            }
     }
+
+
+
+
+    public void clear() {
+        posts.clear();
+        notifyDataSetChanged();
+    }
+
 }

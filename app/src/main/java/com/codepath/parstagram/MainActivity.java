@@ -2,7 +2,6 @@ package com.codepath.parstagram;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -27,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         if (user == null) {
 
             setContentView(R.layout.activity_main);
-            ActionBar actionBar = getSupportActionBar();
-            actionBar.hide();
+          //  ActionBar actionBar = getSupportActionBar();
+           // actionBar.hide();
 
             usernameInput = findViewById(R.id.usernameInput);
             passwordInput = findViewById(R.id.passwordInput);

@@ -10,19 +10,20 @@ tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btLogIn"
+        style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
         android:layout_width="322dp"
-        android:layout_height="58dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/button_bg_transparent"
-        android:padding="15dp"
 
+
+        android:padding="5dp"
 
         android:text="Log In"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Small"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Chip"
         android:textColor="@android:color/background_light"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,14 +34,19 @@ tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btnSignup"
-        android:layout_width="325dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="322dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/button_bg_transparent"
         android:onClick="signUp"
+        android:padding="5dp"
         android:text="Sign Up"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Chip"
+        android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +64,8 @@ tools:context=".MainActivity">
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
+        android:textColorLink="@color/colorAccent"
+        android:textIsSelectable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"

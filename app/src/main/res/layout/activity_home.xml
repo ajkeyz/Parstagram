@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -13,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_bottom_navigation" />
 
@@ -22,6 +29,7 @@
         android:layout_height="50dp"
         android:background="@android:color/white"
 
+        android:elevation="0dp"
         android:minHeight="?attr/actionBarSize"
         app:titleTextColor="@android:color/white">
 
@@ -41,9 +49,8 @@
         android:id="@+id/your_placeholder"
         android:layout_width="match_parent"
         android:layout_height="520dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="47dp">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
     </FrameLayout>
 

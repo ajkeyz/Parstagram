@@ -7,6 +7,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +40,9 @@ public class PostFragment extends Fragment {
     Button btTakePhoto;
     String mCurrentPhotoPath;
     static final int REQUEST_TAKE_PHOTO = 1;
+    FeedFragment feedFragment;
+    RecyclerView rvHomepage;
+    SwipeRefreshLayout swipeContainer;
 
 
     @Override
@@ -64,6 +69,7 @@ public class PostFragment extends Fragment {
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
         etDescription = view.findViewById(R.id.etDescription);
         create_btn = view.findViewById(R.id.create_btn);
+        create_btn.setEnabled(false);
         refresh_btn = view.findViewById(R.id.refresh_btn);
         userImage = view.findViewById(R.id.ivCamImage);
         btLogOut = view.findViewById(R.id.btLogOut);
@@ -80,7 +86,23 @@ public class PostFragment extends Fragment {
                 final File file = new File(mCurrentPhotoPath);
 
                 final ParseFile parseFile = new ParseFile(file);
+
+                //getFragmentManager().popBackStack();
+
+
+
+                ((HomeActivity)getActivity()).changeHome();
                 createPost(description, parseFile, user);
+
+
+//                ((HomeActivity)getActivity()).refresh();
+
+
+
+
+
+
+
             }
         });
 
@@ -92,6 +114,7 @@ public class PostFragment extends Fragment {
                 loadTopPost();
             }
         });*/
+
 
         btTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +133,8 @@ public class PostFragment extends Fragment {
 
 
     }
+
+
 
 
 
@@ -143,7 +168,7 @@ public class PostFragment extends Fragment {
     public void logOut(){
         ParseUser.logOut();
         ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity().getApplication(), MainActivity.class);
         startActivity(intent);
 
     }
@@ -190,7 +215,7 @@ public class PostFragment extends Fragment {
 
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-
+            create_btn.setEnabled(true);
           /*  Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             userImage.setImageBitmap(imageBitmap);
@@ -257,6 +282,9 @@ public class PostFragment extends Fragment {
 
         return file;
     }
+
+
+
 
 
 
