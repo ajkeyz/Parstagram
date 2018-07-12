@@ -1,7 +1,6 @@
 package com.codepath.parstagram;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,14 +22,9 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
-import static com.parse.Parse.getApplicationContext;
 
 
 public class PostFragment extends Fragment {
@@ -79,9 +73,12 @@ public class PostFragment extends Fragment {
         create_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 final String description = etDescription.getText().toString();
                 final ParseUser user = ParseUser.getCurrentUser();
-                final File file = new File(getApplicationContext().getFilesDir(), "temp.jpg");
+              //  final File file = new File(getApplicationContext().getFilesDir(), "temp.jpg");
+                final File file = new File(mCurrentPhotoPath);
+
                 final ParseFile parseFile = new ParseFile(file);
                 createPost(description, parseFile, user);
             }
@@ -128,7 +125,7 @@ public class PostFragment extends Fragment {
             @Override
             public void done(ParseException e) {
                 if (e == null){
-                    Log.d("HomeActivity", "Create Post Success");
+                    Log.d("PostFragment", "Create Post Success");
 
                 }
                 else  {
@@ -168,8 +165,7 @@ public class PostFragment extends Fragment {
                 ex.printStackTrace();
             }
 
-            if (photoFile != null){
-                Uri photoURI = FileProvider.getUriForFile(getActivity(), "com.example.android.fileprovider", photoFile);
+            if (photoFile != null){ Uri photoURI = FileProvider.getUriForFile(getActivity(), "com.codepath.fileprovider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
 
@@ -192,17 +188,18 @@ public class PostFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (requestCode == REQUEST_TAKE_PHOTO) {
-            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-                Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
-                userImage.setImageBitmap(imageBitmap);
-                persistImage(imageBitmap, "temp");
-            }
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+          /*  Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            userImage.setImageBitmap(imageBitmap);
+            persistImage(imageBitmap, "temp" );*/
+            userImage.setImageURI(Uri.parse(mCurrentPhotoPath));
         }
     }
 
-    private void persistImage(Bitmap bitmap, String name) {
+   /* private void persistImage(Bitmap bitmap, String name) {
         File filesDir = getApplicationContext().getFilesDir();
         File imageFile = new File(filesDir, name + ".jpg");
 
@@ -215,21 +212,29 @@ public class PostFragment extends Fragment {
         } catch (Exception e) {
             Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
         }
-    }
+    }*/
     private File createImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+     /*   String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                        storageDir      /* directory*/
+                imageFileName,
+                ".jpg",
+                        storageDir
                         );
+*/
+
+        // getExternalFilesDir() + "/Pictures" should match the declaration in fileprovider.xml paths
+        File file = new File(getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+
+// wrap File object into a content provider. NOTE: authority here should match authority in manifest declaration
+        Uri bmpUri;
+        bmpUri = FileProvider.getUriForFile(getActivity(), "com.codepath.fileprovider", file);
 
     //Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
+        mCurrentPhotoPath = file.getAbsolutePath();
+        return file;
 
 }
 

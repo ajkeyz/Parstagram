@@ -65,6 +65,7 @@ public class FeedFragment extends Fragment {
 
     private void loadTopPost() {
         final Post.Query postQuery = new Post.Query();
+        postQuery.orderByDescending("updatedAt");
         postQuery.getTop().withUser();
 
         postQuery.findInBackground(new FindCallback<Post>() {
