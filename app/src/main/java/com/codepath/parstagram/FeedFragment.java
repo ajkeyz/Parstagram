@@ -19,36 +19,18 @@ import com.parse.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.support.constraint.Constraints.TAG;
-
 
 public class FeedFragment extends Fragment {
     ArrayList<Post> mPosts;
     PostAdapter adapter;
      RecyclerView rvHomepage;
     SwipeRefreshLayout swipeContainer;
-    PostAdapter postAdapter;
-
-
-
-
     //resolve the recycler view
     LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-
-
-
-
-
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-    }
-
+        }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,13 +40,11 @@ public class FeedFragment extends Fragment {
 
     @Override
     public void onResume() {
-
-
         super.onResume();
         Log.d("Feed", "refresh successful");
+        //loads the top posts on resume to fragment
         loadTopPost();
-
-    }
+        }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -77,48 +57,33 @@ public class FeedFragment extends Fragment {
                 fetchTimelineAsync(0);
             }
         });
-
         // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
         mPosts = new ArrayList<>();
         rvHomepage = view.findViewById(R.id.rvPosts);
-
         adapter = new PostAdapter(mPosts);
-
-
         rvHomepage.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvHomepage.setAdapter(adapter);
-
         loadTopPost();
-
-
-    }
+        }
 
     public void fetchTimelineAsync(int page) {
-
         final Post.Query postQuery = new Post.Query();
         postQuery.orderByDescending("updatedAt");
         postQuery.getTop().withUser();
-
         postQuery.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
                     adapter.clear();
-
                     for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post[" + i + "]=" + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername());
+                        Log.d("HomeActivity", "Post[" + i + "]=" + objects.get(i).getDescription() + "\nusername = " + objects.get(i).getUser().getUsername());
                         Post post = objects.get(i);
-
                         mPosts.add(post);
                         adapter.notifyItemInserted(mPosts.size() - 1);
-
-
                     }
                 }
                 else {
@@ -130,26 +95,19 @@ public class FeedFragment extends Fragment {
 
 
     }
-
     public void loadTopPost() {
         final Post.Query postQuery = new Post.Query();
         postQuery.orderByDescending("updatedAt");
         postQuery.getTop().withUser();
-
         postQuery.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
-                    adapter.clear();
-
                     for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post[" + i + "]=" + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername());
+                        Log.d("HomeActivity", "Post[" + i + "]=" + objects.get(i).getDescription() + "\nusername = " + objects.get(i).getUser().getUsername());
                         Post post = objects.get(i);
                         mPosts.add(post);
                         adapter.notifyItemInserted(mPosts.size() - 1);
-
-
                     }
                 }
                 else {
@@ -158,19 +116,4 @@ public class FeedFragment extends Fragment {
             }
         });
     }
-
-
-
-    SwipeRefreshLayout.OnRefreshListener swipeRefreshListner = new SwipeRefreshLayout.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-            Log.i(TAG, "onRefresh called from SwipeRefreshLayout");
-            // This method performs the actual data-refresh operation.
-            // The method calls setRefreshing(false) when it's finished.
-            loadTopPost();
-        }
-    };
-
-
-
 }

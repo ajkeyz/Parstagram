@@ -12,18 +12,11 @@ import com.parse.ParseFile;
 import org.parceler.Parcels;
 
 public class DetailsActivity extends AppCompatActivity {
-
-
     Post post;
     ImageView detailImage;
     TextView detailTime;
     TextView detailDescription;
     TextView detailUsername;
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +25,6 @@ public class DetailsActivity extends AppCompatActivity {
         detailDescription = findViewById(R.id.detailDescription);
         detailUsername = findViewById(R.id.detailUsername);
         detailTime = findViewById(R.id.detailTime);
-
         post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
         detailDescription.setText(post.getUser().getUsername() + " : " + post.getDescription());
         detailUsername.setText(post.getUser().getUsername());
@@ -43,11 +35,8 @@ public class DetailsActivity extends AppCompatActivity {
         if (img != null) {
             imgUrl = img.getUrl();
         }
-
         Glide.with(this)
                 .load(imgUrl)
                 .into(detailImage);
-
-
     }
 }

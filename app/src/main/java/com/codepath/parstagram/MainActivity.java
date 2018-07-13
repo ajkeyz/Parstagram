@@ -17,31 +17,21 @@ public class MainActivity extends AppCompatActivity {
     private EditText usernameInput;
     private EditText passwordInput;
     private Button btLogIn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         ParseUser user = ParseUser.getCurrentUser();
         if (user == null) {
-
             setContentView(R.layout.activity_main);
-          //  ActionBar actionBar = getSupportActionBar();
-           // actionBar.hide();
-
             usernameInput = findViewById(R.id.usernameInput);
             passwordInput = findViewById(R.id.passwordInput);
             btLogIn = findViewById(R.id.btLogIn);
-
-
             btLogIn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     //fetch the user's input
                     final String username = usernameInput.getText().toString();
                     final String password = passwordInput.getText().toString();
-
                     //feed them into the login method
                     login(username, password);
 
@@ -54,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
-
     private void login(String username, String password){
         //setup parse configuration
         ParseUser.logInInBackground(username, password, new LogInCallback() {
@@ -74,21 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
     }
-
     public void signUp(View view){
         Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
         startActivity(intent);
     }
-
-
-
-
-
 }

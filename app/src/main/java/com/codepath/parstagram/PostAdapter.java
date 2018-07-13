@@ -2,7 +2,6 @@ package com.codepath.parstagram;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,36 +19,20 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-
-
     ArrayList<Post> posts;
     Context context;
-    Bitmap.Config config;
     RecyclerView recyclerView;
-
-
     //intitialize list of posts
     public PostAdapter(ArrayList<Post> posts) {
         this.posts = posts;
     }
-
-    public Bitmap.Config getConfig() {
-        return config;
-    }
-
-    public void setConfig(Bitmap.Config config) {
-        this.config = config;
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View postView = inflater.inflate(R.layout.itempost, parent, false);
-
         //return new Viewholder
-
         return new ViewHolder(postView);
     }
 
@@ -70,24 +53,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         Glide.with(context)
                 .load(imgUrl)
                 .into(holder.userImage);
-
-
-    }
+        }
 
 
     @Override
     public int getItemCount() {
         return posts.size();
     }
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         ImageView userImage;
         TextView etDescription;
         TextView userName;
         TextView timeStamp;
-
-
         public ViewHolder(View itemView) {
             super(itemView);
             userImage = itemView.findViewById(R.id.homeImage);
@@ -96,15 +73,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             timeStamp = itemView.findViewById(R.id.tvTimeStamp);
 
             itemView.setOnClickListener(this);
-
-
-        }
-
+            }
 
         @Override
         public void onClick(View view) {
-
-
             //get item position
             int position = getAdapterPosition();
             //make sure the position is valid
@@ -116,20 +88,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
                 intent.putExtra("post", Parcels.wrap(post));
                 //show the activity
-               context.startActivity(intent);
-
-
+                context.startActivity(intent);
             }
         }
-
-
-
     }
     public void clear() {
         posts.clear();
         notifyDataSetChanged();
     }
-
 }
 
 
