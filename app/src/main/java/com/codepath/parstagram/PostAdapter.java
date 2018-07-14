@@ -19,9 +19,10 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+
+
     ArrayList<Post> posts;
     Context context;
-    RecyclerView recyclerView;
     //intitialize list of posts
     public PostAdapter(ArrayList<Post> posts) {
         this.posts = posts;
@@ -53,18 +54,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         Glide.with(context)
                 .load(imgUrl)
                 .into(holder.userImage);
-        }
+
+
+    }
 
 
     @Override
     public int getItemCount() {
         return posts.size();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         ImageView userImage;
         TextView etDescription;
         TextView userName;
         TextView timeStamp;
+
+
         public ViewHolder(View itemView) {
             super(itemView);
             userImage = itemView.findViewById(R.id.homeImage);
@@ -73,7 +80,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             timeStamp = itemView.findViewById(R.id.tvTimeStamp);
 
             itemView.setOnClickListener(this);
-            }
+
+
+        }
+
 
         @Override
         public void onClick(View view) {
@@ -81,21 +91,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             int position = getAdapterPosition();
             //make sure the position is valid
             if (position != RecyclerView.NO_POSITION) {
-                //get the movie at the position, this wont work if the class is static
+                //get the post at the position, this wont work if the class is static
                 Post post = posts.get(position);
                 //create an intent for the activity
                 Intent intent = new Intent(context, DetailsActivity.class);
-
                 intent.putExtra("post", Parcels.wrap(post));
                 //show the activity
                 context.startActivity(intent);
-            }
+                }
         }
     }
+
     public void clear() {
         posts.clear();
         notifyDataSetChanged();
     }
+
 }
 
 

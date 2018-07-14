@@ -33,7 +33,6 @@ public class PostFragment extends Fragment {
     static final int REQUEST_TAKE_PHOTO = 1;
     EditText etDescription;
     Button create_btn;
-    Button refresh_btn;
     ImageView userImage;
     Button btLogOut;
     Button btTakePhoto;
@@ -56,9 +55,7 @@ public class PostFragment extends Fragment {
         create_btn = view.findViewById(R.id.create_btn);
         //makes button unclickable until a post is added
         create_btn.setEnabled(false);
-        refresh_btn = view.findViewById(R.id.refresh_btn);
         userImage = view.findViewById(R.id.ivCamImage);
-        btLogOut = view.findViewById(R.id.btLogOut);
         btTakePhoto = view.findViewById(R.id.btTakePhoto);
         create_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,12 +74,6 @@ public class PostFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 dispatchTakePictureIntent();
-            }
-        });
-        btLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logOut();
             }
         });
 
@@ -109,13 +100,6 @@ public class PostFragment extends Fragment {
             }
         });
 
-
-    }
-
-    public void logOut() {
-        ParseUser.logOut();
-        Intent intent = new Intent(getActivity().getApplication(), MainActivity.class);
-        startActivity(intent);
 
     }
     public void dispatchTakePictureIntent() {

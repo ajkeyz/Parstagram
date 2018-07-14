@@ -25,12 +25,14 @@ public class FeedFragment extends Fragment {
     PostAdapter adapter;
      RecyclerView rvHomepage;
     SwipeRefreshLayout swipeContainer;
-    //resolve the recycler view
-    LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+    PostAdapter postAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        }
+
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,11 +42,13 @@ public class FeedFragment extends Fragment {
 
     @Override
     public void onResume() {
+
+
         super.onResume();
         Log.d("Feed", "refresh successful");
-        //loads the top posts on resume to fragment
         loadTopPost();
-        }
+
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
